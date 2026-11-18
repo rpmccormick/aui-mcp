@@ -1,0 +1,14 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      auiApiKey:
+        type: string
+        description: Optional AUI trial-... or paid production API key (omit for free deterministic <50ms sandbox mode).
+  commandFunction: |-
+    (config) => ({
+      command: 'node',
+      args: ['index.js'],
+      env: config && config.auiApiKey ? { AUI_API_KEY: config.auiApiKey } : {}
+    })

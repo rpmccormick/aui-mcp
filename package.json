@@ -1,0 +1,38 @@
+{
+  "name": "aui-mcp",
+  "version": "2.6.2",
+  "description": "Model Context Protocol (MCP) server for AUI (Agentic User Interface) — turn raw agent JSON, SQL rows, CSV, and URLs into interactive 2-Line DataTables, Apache ECharts, Omni-Time V3 Spatial Timelines, and DayPilot 2D Resource Tapes in <50ms.",
+  "main": "index.js",
+  "bin": {
+    "aui-mcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "node -e \"const cp=require('child_process');const p=cp.spawn('node',['index.js']);p.stdout.once('data',d=>{console.log(d.toString().trim());p.kill();process.exit(0);});p.stdin.write(JSON.stringify({jsonrpc:'2.0',id:1,method:'tools/list'})+'\\n');\""
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "generative-ui",
+    "agentic-ui",
+    "datatables",
+    "echarts",
+    "timeline",
+    "daypilot",
+    "ai-agents"
+  ],
+  "homepage": "https://svsrva.com/aui/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rpmccormick/aui-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rpmccormick/aui-mcp/issues"
+  },
+  "author": "Ryan McCormick <rpmccormick@gmail.com> (https://svsrva.com)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
