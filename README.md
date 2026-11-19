@@ -51,7 +51,7 @@ Requires Node.js `>= 18` (zero npm packages downloaded):
 
 ### Option 2: Direct Remote Streamable HTTP MCP Server
 
-If your MCP client supports remote Streamable HTTP (`2024-11-05` / `2025-03-26`), point it straight at:
+If your MCP client supports remote Streamable HTTP (`2024-11-05` / `2025-11-25`), point it straight at:
 
 ```text
 https://svsrva.com/mcp
@@ -61,14 +61,15 @@ https://svsrva.com/mcp
 
 ---
 
-## 🛠️ Exposed MCP Tools
+## 🛠️ Exposed MCP Tools (MCP `2025-11-25` Annotations + `outputSchema`)
 
 | Tool | Description |
 | :--- | :--- |
 | **`aui_generate_ui`** | Compile raw `data` (JSON array/object or CSV) or a public `url` into a cached, XSS-isolated interactive `embed_url` (`dt`, `cg`, `tl`, `dp`, or `auto`). |
-| **`aui_claim_free_trial`** | Machine-to-machine onboarding: pass a BYOK Google Gemini key (`AIza...`) to mint a **100-credit `trial-...` key** automatically with zero human signup. |
+| **`aui_get_status`** | Read-only (`0` credits): inspect an `aui_api_key`'s tier & remaining credit balance and/or verify metadata & `embed_url` for an existing `chk_...` widget. |
+| **`aui_claim_free_trial`** | Machine-to-machine onboarding: pass a BYOK Google Gemini key (`AIza...`) to mint or retrieve a **100-credit `trial-...` key** automatically with zero human signup. |
 | **`aui_verify_solana_key`** | Verify a `0.1 SOL` transfer to `Gn4B5GnuR5dWhP9dGWJgsaWDNnhkSBTjDyrPSyrevM23` on Solana mainnet and claim a **500-run Hosted Production Key** (hosted Gemini inference + SMS/Email sharing included). |
-| **`aui_share_widget`** | Text or email any generated AUI visualization (`cache_id`) directly via Twilio A2P SMS or Mailgun Email. |
+| **`aui_share_widget`** | Text or email any generated AUI visualization (`cache_id`) directly via Twilio A2P SMS or Mailgun Email (`1` credit per send). |
 
 ---
 

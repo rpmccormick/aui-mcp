@@ -1,6 +1,6 @@
 {
   "name": "aui-mcp",
-  "version": "2.6.2",
+  "version": "2.6.3",
   "description": "Model Context Protocol (MCP) server for AUI (Agentic User Interface) — turn raw agent JSON, SQL rows, CSV, and URLs into interactive 2-Line DataTables, Apache ECharts, Omni-Time V3 Spatial Timelines, and DayPilot 2D Resource Tapes in <50ms.",
   "main": "index.js",
   "bin": {
