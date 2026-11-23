@@ -1,14 +1,24 @@
 {
   "name": "aui-mcp",
-  "version": "2.6.3",
-  "description": "Model Context Protocol (MCP) server for AUI (Agentic User Interface) — turn raw agent JSON, SQL rows, CSV, and URLs into interactive 2-Line DataTables, Apache ECharts, Omni-Time V3 Spatial Timelines, and DayPilot 2D Resource Tapes in <50ms.",
+  "version": "2.6.4",
+  "description": "Model Context Protocol (MCP) server for AUI (Agentic User Interface) — turn raw agent JSON, SQL rows, CSV, and URLs into interactive 2-Line DataTables, Zero-Clip Sankey & Apache ECharts, Omni-Time V3 Spatial Timelines, and DayPilot 2D Resource Tapes in <50ms.",
   "main": "index.js",
   "bin": {
     "aui-mcp": "./index.js"
   },
+  "files": [
+    "index.js",
+    "README.md",
+    "CHANGELOG.md",
+    "SECURITY.md",
+    "LICENSE",
+    "glama.json",
+    "smithery.yaml"
+  ],
   "scripts": {
     "start": "node index.js",
-    "test": "node -e \"const cp=require('child_process');const p=cp.spawn('node',['index.js']);p.stdout.once('data',d=>{console.log(d.toString().trim());p.kill();process.exit(0);});p.stdin.write(JSON.stringify({jsonrpc:'2.0',id:1,method:'tools/list'})+'\\n');\""
+    "lint": "node --check index.js",
+    "test": "node --check index.js && node -e \"const cp=require('child_process');const p=cp.spawn('node',['index.js']);const t=setTimeout(()=>{p.kill();process.exit(1);},12000);p.stdout.once('data',d=>{clearTimeout(t);const j=JSON.parse(d.toString().trim());if(!j.result||!Array.isArray(j.result.tools)||j.result.tools.length<5)process.exit(1);console.log('OK tools='+j.result.tools.length);p.kill();process.exit(0);});p.stdin.write(JSON.stringify({jsonrpc:'2.0',id:1,method:'tools/list'})+'\\n');\""
   },
   "keywords": [
     "mcp",
@@ -18,6 +28,7 @@
     "agentic-ui",
     "datatables",
     "echarts",
+    "sankey",
     "timeline",
     "daypilot",
     "ai-agents"

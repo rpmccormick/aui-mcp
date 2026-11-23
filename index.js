@@ -6,9 +6,23 @@
  */
 
 const readline = require('readline');
+const pkg = require('./package.json');
+
+if (process.argv.includes('--version') || process.argv.includes('-v')) {
+  process.stdout.write(`${pkg.version}\n`);
+  process.exit(0);
+}
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  process.stdout.write(
+    `aui-mcp v${pkg.version} — Zero-dependency MCP stdio <-> Streamable HTTP bridge for AUI (https://svsrva.com/aui/)\n` +
+    `Usage: AUI_API_KEY=<optional> npx -y github:rpmccormick/aui-mcp\n`
+  );
+  process.exit(0);
+}
 
 const ENDPOINT = process.env.AUI_MCP_URL || 'https://svsrva.com/mcp';
 const API_KEY = process.env.AUI_API_KEY || process.env.AUI_KEY || '';
+const TIMEOUT_MS = Number(process.env.AUI_TIMEOUT_MS || 25000);
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -37,7 +51,8 @@ async function forwardRpc(line) {
   try {
     const headers = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'User-Agent': `aui-mcp/${pkg.version}`
     };
     if (API_KEY) {
       headers['Authorization'] = `Bearer ${API_KEY}`;
@@ -46,7 +61,8 @@ async function forwardRpc(line) {
     const res = await fetch(ENDPOINT, {
       method: 'POST',
       headers,
-      body: JSON.stringify(parsed)
+      body: JSON.stringify(parsed),
+      signal: typeof AbortSignal !== 'undefined' && AbortSignal.timeout ? AbortSignal.timeout(TIMEOUT_MS) : undefined
     });
 
     if (isNotification || res.status === 202 || res.status === 204) {
